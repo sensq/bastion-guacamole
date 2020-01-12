@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root_pass"
+      MYSQL_DATABASE: "guacamole_db"
+      MYSQL_USER: "guacamole_usr"
+      MYSQL_PASSWORD: "guacamole_pass"
+    volumes:
+      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+      - ./mysql:/var/lib/mysql
+  
+  guacd:
+    image: guacamole/guacd
+  
+  guacamole:
+    image: guacamole/guacamole
+    ports:
+      - "8080:8080"
+    environment:
+      GUACD_HOSTNAME: guacd
+      MYSQL_HOSTNAME: mysql
+      MYSQL_DATABASE: "guacamole_db"
+      MYSQL_USER: "guacamole_usr"
+      MYSQL_PASSWORD: "guacamole_pass"
+      GUACAMOLE_HOME: /etc/guacamole
+    volumes:
+      - ./user-mapping.xml:/etc/guacamole/user-mapping.xml
+
+  chrome:
+    image: selenium/standalone-chrome-debug
+
+  firefox:
+    image: selenium/standalone-firefox-debug
