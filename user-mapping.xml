@@ -6,6 +6,7 @@
             <param name="hostname">chrome</param>
             <param name="port">5900</param>
             <param name="password">secret</param>
+            <param name="clipboard-encoding">UTF-8</param>
         </connection>
 
         <connection name="Mozilla Firefox">
@@ -13,6 +14,7 @@
             <param name="hostname">firefox</param>
             <param name="port">5900</param>
             <param name="password">secret</param>
+            <param name="clipboard-encoding">UTF-8</param>
         </connection>
     </authorize>
 
