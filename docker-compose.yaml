@@ -1,15 +1,14 @@
 version: '3'
 services:
-  mysql:
-    image: mysql
+  postgres:
+    image: postgres:alpine
     environment:
-      MYSQL_ROOT_PASSWORD: "root_pass"
-      MYSQL_DATABASE: "guacamole_db"
-      MYSQL_USER: "guacamole_usr"
-      MYSQL_PASSWORD: "guacamole_pass"
+      POSTGRES_DB: "guacamole_db"
+      POSTGRES_USER: "guacamole_usr"
+      POSTGRES_PASSWORD: "guacamole_pass"
     volumes:
       - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
-      - ./mysql:/var/lib/mysql
+      - ./postgres:/var/lib/postgresql/data
   
   guacd:
     image: guacamole/guacd
@@ -20,10 +19,10 @@ services:
       - "8080:8080"
     environment:
       GUACD_HOSTNAME: guacd
-      MYSQL_HOSTNAME: mysql
-      MYSQL_DATABASE: "guacamole_db"
-      MYSQL_USER: "guacamole_usr"
-      MYSQL_PASSWORD: "guacamole_pass"
+      POSTGRES_HOSTNAME: postgres
+      POSTGRES_DATABASE: "guacamole_db"
+      POSTGRES_USER: "guacamole_usr"
+      POSTGRES_PASSWORD: "guacamole_pass"
       GUACAMOLE_HOME: /etc/guacamole
     volumes:
       - ./user-mapping.xml:/etc/guacamole/user-mapping.xml
