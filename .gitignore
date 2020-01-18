@@ -1,2 +1,2 @@
-postgres
-initdb.sql
+postgres/
+sql/initdb.sql

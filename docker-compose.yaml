@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: "guacamole_usr"
       POSTGRES_PASSWORD: "guacamole_pass"
     volumes:
-      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+      - ./sql:/docker-entrypoint-initdb.d
       - ./postgres:/var/lib/postgresql/data
   
   guacd:
@@ -23,9 +23,6 @@ services:
       POSTGRES_DATABASE: "guacamole_db"
       POSTGRES_USER: "guacamole_usr"
       POSTGRES_PASSWORD: "guacamole_pass"
-      GUACAMOLE_HOME: /etc/guacamole
-    volumes:
-      - ./user-mapping.xml:/etc/guacamole/user-mapping.xml
 
   chrome:
     image: selenium/standalone-chrome-debug
