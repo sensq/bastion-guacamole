@@ -26,6 +26,3 @@ services:
 
   chrome:
     image: selenium/standalone-chrome-debug
-
-  firefox:
-    image: selenium/standalone-firefox-debug
