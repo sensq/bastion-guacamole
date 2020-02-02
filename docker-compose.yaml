@@ -2,6 +2,7 @@ version: '3'
 services:
   postgres:
     image: postgres:alpine
+    restart: unless-stopped
     environment:
       POSTGRES_DB: "guacamole_db"
       POSTGRES_USER: "guacamole_usr"
@@ -12,9 +13,11 @@ services:
   
   guacd:
     image: guacamole/guacd
+    restart: unless-stopped
   
   guacamole:
     image: guacamole/guacamole
+    restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
@@ -26,6 +29,8 @@ services:
 
   chrome:
     image: selenium/standalone-chrome-debug
+    restart: unless-stopped
 
   firefox:
     image: selenium/standalone-firefox-debug
+    restart: unless-stopped
